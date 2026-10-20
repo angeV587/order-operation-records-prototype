@@ -24,9 +24,9 @@ const data=[
 const sampleActors=[
  {source:'APP',entry:'填写订单页',person:'演示用户A',account:'demo_user_a',device:'演示手机 / Android 14',deviceId:'DEMO-DEVICE-C'},
  {source:'PC',entry:'单据详情页',person:'演示用户B',account:'demo_user_b',device:'演示电脑 / Chrome',deviceId:'DEMO-DEVICE-D'},
- {source:'APP',entry:'填写订单页',person:'演示用户A',account:'demo_user_a_long_account_for_layout_demo',device:'演示手机 / iOS 18',deviceId:'DEMO-DEVICE-E-LONG-LAYOUT-DEMO'}
+ {source:'APP',entry:'填写订单页',person:'演示用户A',account:'demo_user_a',device:'演示手机 / iOS 18',deviceId:'DEMO-DEVICE-E'}
 ];
-data.push(...Array.from({length:55},(_,i)=>{const actor=sampleActors[i%3],result=i%13===8?'结果未知':i%9===4?'失败':'成功';return {id:`HF003-${String(i+1).padStart(3,'0')}`,time:`2026-09-16 08:${String(i).padStart(2,'0')}:00`,order:'DEMO-DD003',store:'演示门店C',type:'保存',result,...actor,adjusted:false,trace:'TRACE-DEMO-HF-003',items:snapshot(),note:'高频操作虚构样例，用于展示逐条记录、分页、多设备和较长文本；不代表真实业务数据。'}}));
+data.push(...Array.from({length:55},(_,i)=>{const actor=sampleActors[i%3],result=i%13===8?'结果未知':(i%9===4||i%9===5)?'失败':'成功';return {id:`HF003-${String(i+1).padStart(3,'0')}`,time:`2026-09-16 08:${String(i).padStart(2,'0')}:00`,order:'DEMO-DD003',store:'演示门店C',type:'保存',result,...actor,adjusted:false,trace:'TRACE-DEMO-HF-003',items:snapshot(),note:'虚构演示单据，包含多设备多次保存记录。'}}));
 let filtered=[],hasQueried=false,page=1,selected=new Set(),active=null,detailTab='snapshot',detailRecordPage=1;
 const detailPageSize=20;
 function recordAccount(r){return r.account||(r.source==='APP'?'demo_user_a':'demo_user_b')}
